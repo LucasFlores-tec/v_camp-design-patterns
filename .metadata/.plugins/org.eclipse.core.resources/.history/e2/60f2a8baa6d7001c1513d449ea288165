@@ -1,0 +1,51 @@
+package br.com.virtualoutletstore.facade.order;
+
+import br.com.virtualoutletstore.composite.cart.Cart;
+import br.com.virtualoutletstore.factory.shipping.Shipping;
+
+/**
+ * Order (FACADE)
+ */
+public class Order {
+	
+	private Cart cart;
+
+	private Shipping shipping;
+	
+	private String status;
+	
+	public Order(Cart cart, Shipping shipping, String status) {
+		this.cart = cart;
+		this.shipping = shipping;
+		this.status = status;
+	}
+
+	public Cart getOrderCart() {
+		return cart;
+	}
+	
+	public void setOrderCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public Shipping getOrderShipping() {
+		return shipping;
+	}
+	
+	public void setOrderShipping(Cart cart) {
+		this.shipping = cart.getShipping();
+	}
+
+	public String getOrderStatus() {
+		return status;
+	}
+	
+	public void setOrderStatus(String status) {
+		this.status = status;
+		if(status=="cancelled") {
+			setOrderCart(new Cart());
+			System.out.println("This order is cancelled");
+		}
+	}
+	
+}

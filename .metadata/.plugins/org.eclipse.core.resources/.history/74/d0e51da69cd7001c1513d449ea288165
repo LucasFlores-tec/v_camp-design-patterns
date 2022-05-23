@@ -1,0 +1,35 @@
+package br.com.virtualoutletstore.observer.backoffice;
+
+import br.com.virtualoutletstore.facade.order.Order;
+import br.com.virtualoutletstore.iterator.orderlist.OrderList;
+
+public class Backoffice implements OrderListObserver, OrderStatusObserver {
+	
+	@Override
+	public void renderOrderList(OrderList orderList) {
+		int numberOfOrdersInTheOrderList = orderList.getListOfOrders().size();
+		System.out.println("\nORDER ADDED:\n");
+		System.out.println("Order: " + OrderList.getInstanceOfOrderList().getListOfOrders().get(numberOfOrdersInTheOrderList-1));
+		System.out.println("Status: " + OrderList.getInstanceOfOrderList().getListOfOrders().get(numberOfOrdersInTheOrderList-1).getStatus());
+		System.out.println("Cart: " + OrderList.getInstanceOfOrderList().getListOfOrders().get(numberOfOrdersInTheOrderList-1).getCart());
+		System.out.println(OrderList.getInstanceOfOrderList().getListOfOrders().get(numberOfOrdersInTheOrderList-1).getShipping());
+		System.out.println("\n=================\n");
+	}
+
+	public void getOrderList() {
+		for(Order order: OrderList.getInstanceOfOrderList().getListOfOrders()) {
+			System.out.println("Cart: " + order.getCart());
+			System.out.println("Status: " + order.getStatus());
+			System.out.println("Shipping: " + order.getShipping());
+			System.out.println("\n=================\n");
+		}
+	}
+
+	@Override
+	public void alterStatus(Order order) {
+		if(order.getStatus()=="cancelled") {
+			order.getCart().removeProductsFromCart();
+		}
+	}
+
+}

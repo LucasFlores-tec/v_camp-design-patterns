@@ -1,0 +1,20 @@
+package br.com.virtualoutletstore.facade.order;
+
+import org.junit.Test;
+
+public class OrderTest {
+	
+	@Test
+	public void setOrderTest() {
+		// Scenario
+		Cart cart = new Cart();
+		Order order = new Order(cart, null, null)
+		
+		
+		// Action
+		
+		
+		// Verification
+	}
+
+}

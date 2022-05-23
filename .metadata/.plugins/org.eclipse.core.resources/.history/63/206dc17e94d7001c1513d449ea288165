@@ -1,0 +1,69 @@
+package br.com.virtualoutletstore.facade.order;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.virtualoutletstore.composite.cart.Cart;
+import br.com.virtualoutletstore.observer.backoffice.OrderStatusObserver;
+
+/**
+ * Order (FACADE)
+ */
+public class Order {
+	
+	private Cart cart;
+
+	private String shipping;
+	
+	private String status;
+	
+	private List<OrderStatusObserver> statusObservers = new ArrayList<>();
+
+	public Order(Cart cart, String shipping, String status) {
+		this.cart = cart;
+		this.shipping = shipping;
+		this.status = status;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+	
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public String getShipping() {
+		return shipping;
+	}
+	
+	public void setShipping(String shipping) {
+		this.shipping = shipping;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+		switch(status) {
+			case "pending": System.out.println("Status PENDING"); break;
+			case "paid": System.out.println("Status PAID"); break;
+			case "cancelled": System.out.println("Status CANCELLED"); break;
+			case "completed": System.out.println("Status COMPLETED"); break;
+			case "shipped": System.out.println("Your order is on its way to you\nStatus SHIPPED"); break;
+			default: System.out.println("Status od the order not found\n"); break;
+		}
+		statusObservers.forEach(o->o.alterStatus(this));
+	}
+	
+	public void attachObserver(OrderStatusObserver observer) {
+		statusObservers.add(observer);
+	}
+	
+	public void detachObserver(OrderStatusObserver observer) {
+		statusObservers.remove(observer);
+	}
+
+}

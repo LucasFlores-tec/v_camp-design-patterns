@@ -1,0 +1,16 @@
+package br.com.virtualoutletstore.factory.shipping;
+
+public abstract class Shipping implements Transport {
+	
+	private String type;
+
+	@Override
+	public Double getPrice() {
+		return 0d;
+	}
+	
+	public String getType() {
+		return type;
+	};
+	
+}

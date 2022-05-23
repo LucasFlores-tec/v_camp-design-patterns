@@ -1,0 +1,77 @@
+package br.com.virtualoutletstore.builder.catalog;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+public class CatalogTest {
+
+	@Test
+	public void addBookToCatalogTest() {
+		// Scenario
+		Catalog catalog = new Catalog();
+		
+		// Action
+		catalog.addProductToCatalog("book");
+		
+		// Verification
+		assertEquals(catalog.getAllProducts().get(0).getSku(), 1);
+		assertEquals(catalog.getAllProducts().get(0).getPrice(), 200.0, 0.01);
+		assertEquals(catalog.getAllProducts().get(0).getWeight(), 0.350, 0.001);
+		assertEquals(catalog.getAllProducts().get(0).getBook().getAuthor(), "Robert C. Martin; Michael C. Feathers; Timothy R. Ottinger");
+		assertEquals(catalog.getAllProducts().get(0).getBook().getTitle(), "Clean Code: A Handbook of Agile Software Craftsmanship");
+	}
+	
+	@Test
+	public void addTshirtToCatalog() {
+		// Scenario
+		Catalog catalog1 = new Catalog();
+		
+		// Action
+		catalog1.addProductToCatalog("tshirt");
+		
+		// Verification
+		assertEquals(catalog1.getAllProducts().get(0).getSku(), 2);
+		assertEquals(catalog1.getAllProducts().get(0).getPrice(), 50.0, 0.01);
+		assertEquals(catalog1.getAllProducts().get(0).getWeight(), 0.100, 0.001);
+		assertEquals(catalog1.getAllProducts().get(0).getTshirt().getColor(), "Black");
+		assertEquals(catalog1.getAllProducts().get(0).getTshirt().getSize(), "G");
+	}
+	
+	@Test
+	public void addSsdCardToCatalog() {
+		// Scenario
+		Catalog catalog2 = new Catalog();
+		
+		// Action
+		catalog2.addProductToCatalog("ssdcard");
+		
+		// Verification
+		assertEquals(catalog2.getAllProducts().get(0).getSku(), 3);
+		assertEquals(catalog2.getAllProducts().get(0).getPrice(), 350.0, 0.01);
+		assertEquals(catalog2.getAllProducts().get(0).getWeight(), 0.50, 0.01);
+		assertEquals(catalog2.getAllProducts().get(0).getSsdcard().getBrand(), "Kingston");
+		assertEquals(catalog2.getAllProducts().get(0).getSsdcard().getGigabytes(), 480);
+	}
+	
+	@Test
+	public void addMouseToCatalog() {
+		// Scenario
+		Catalog catalog3 = new Catalog();
+		
+		// Action
+		catalog3.addProductToCatalog("mouse");
+		
+		// Verification
+		assertEquals(catalog3.getAllProducts().get(0).getSku(), 4);
+		assertEquals(catalog3.getAllProducts().get(0).getPrice(), 80.0, 0.01);
+		assertEquals(catalog3.getAllProducts().get(0).getWeight(), 0.50, 0.01);
+		assertEquals(catalog3.getAllProducts().get(0).getTshirt().getColor(), "Logitech");
+		assertEquals(catalog3.getAllProducts().get(0).getTshirt().getSize(), "Bluetooth");
+		
+	}
+	
+	
+	
+
+}

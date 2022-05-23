@@ -1,0 +1,87 @@
+package br.com.virtualoutletstore.composite.cart;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.virtualoutletstore.builder.catalog.Product;
+import br.com.virtualoutletstore.factory.shipping.Aero;
+import br.com.virtualoutletstore.factory.shipping.Road;
+import br.com.virtualoutletstore.factory.shipping.Shipping;
+import br.com.virtualoutletstore.singleton.inventory.ProductInventory;
+
+/**
+ * Cart (COMPOSITE)
+ */
+public class Cart {
+	
+	private List<Product> cart = new ArrayList<>();
+	
+	public List<Product> getCart() {
+		return cart;
+	}
+	
+	public int getProductQuantity(int productSku) {
+		int prodQtd=0;
+		for(Product product: cart) {
+			if(product.getSku()==productSku) {
+				prodQtd++;
+			}
+		}
+		return prodQtd;
+	}
+
+	public Double getTotalPriceOfTheCart() {
+		Double Total = 0d;
+		for(Product product: cart) {
+			Total += product.getPrice();
+		}
+		return Total;
+	}
+	
+	public Double getTotalWeightOfTheCart() {
+		Double weight = 0d;
+		for(Product product: cart) {
+			weight += product.getWeight();
+		}
+		return weight;
+	}
+	
+	public String getShipping(Cart cart) {
+		Shipping shipping;
+		if(cart.getTotalWeightOfTheCart() <= 10) {
+			shipping = new Aero();
+		} else {
+			shipping = new Road();
+		}
+		return "Shipping Price: R$" + shipping.getPrice(cart) + "\nShipping Type: " + shipping.getType();
+	}
+	
+	public void addProductToCart(int productSku, int quantity) {
+		ProductInventory.getInstanceOfInventory().removeProductFromStock(productSku, quantity);
+		for(Product product: ProductInventory.getInstanceOfInventory().getInventory()) {
+			if(product.getSku()==productSku) {
+				for(int i=0;i<quantity;i++) {
+					cart.add(product);
+				}
+			}
+		}
+	}
+	
+	public void removeProductFromCart(int productSku, int quantity) {
+		ProductInventory.getInstanceOfInventory().returnProductToStock(productSku, quantity);;
+		for(int i=0;i<quantity;i++) {
+			for(int j=0;j<getCart().size();j++) {
+				if(getCart().get(j).getSku()==productSku) {
+						getCart().remove(j);
+					}
+				}
+			}
+		}
+	
+	public void removeProductsFromCart() {
+		for(Product product: getCart()) {
+			removeProductFromCart(product.getSku(), 1);
+		}
+	}
+
+}

@@ -1,0 +1,27 @@
+package br.com.virtualoutletstore.composite.cart;
+
+import org.junit.Test;
+
+import br.com.virtualoutletstore.builder.catalog.Catalog;
+import br.com.virtualoutletstore.singleton.inventory.ProductInventory;
+
+public class RemoveProductFromCartTest {
+	
+	@Test
+	public void remove() {
+		Catalog catalogCartTest = new Catalog();
+		catalogCartTest.addProductToCatalog("book");
+		catalogCartTest.addProductToCatalog("tshirt");
+		catalogCartTest.addProductToCatalog("ssdcard");
+		catalogCartTest.addProductToCatalog("mouse");
+		ProductInventory.addCatalogToInventory(catalogCartTest);
+		Cart cart = new Cart();
+		
+		cart.addProductToCart(1, 1);
+		cart.addProductToCart(2, 2);
+		cart.addProductToCart(3, 3);
+		
+		System.out.println(cart.getCart().size());
+	}
+
+}

@@ -1,0 +1,72 @@
+package br.com.virtualoutletstore.builder.catalog;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+
+import org.hamcrest.CoreMatchers;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ErrorCollector;
+
+public class CatalogTest {
+	
+	private Catalog catalog;
+	
+	@Rule
+	public ErrorCollector error = new ErrorCollector();
+	
+	@Before
+	public void setTestScenario() {
+		// Scenario
+		catalog = new Catalog();
+	}
+
+	@Test
+	public void a1_addBookToCatalog() {
+		// Action
+		catalog.addProductToCatalog("book");
+		
+		// Verification
+		error.checkThat(catalog.getAllProducts().get(0).getSku(), is(equalTo(1)));
+		error.checkThat(catalog.getAllProducts().get(0).getPrice(), is(equalTo(200.0)));
+		error.checkThat(catalog.getAllProducts().get(0).getWeight(), is(equalTo(0.350)));
+		error.checkThat(catalog.getAllProducts().get(0).getBook().getAuthor(), is(equalTo("Robert C. Martin; Michael C. Feathers; Timothy R. Ottinger")));
+		error.checkThat(catalog.getAllProducts().get(0).getBook().getTitle(), is(equalTo("Clean Code: A Handbook of Agile Software Craftsmanship")));
+
+	}
+
+	
+	@Test
+	public void a2_addTshirtToCatalog() {
+		// Action
+		catalog.addProductToCatalog("tshirt");
+		
+		// Verification
+		error.checkThat(catalog.getAllProducts().get(1).getSku(), CoreMatchers.is(CoreMatchers.equalTo(2)));
+		error.checkThat(50.0, catalog.getAllProducts().get(1).getPrice(), 0.01);
+		error.checkThat(0.100, catalog.getAllProducts().get(1).getWeight(), 0.001);
+		error.checkThat("Black", catalog.getAllProducts().get(1).getTshirt().getColor());
+		error.checkThat("G", catalog.getAllProducts().get(1).getTshirt().getSize());
+		
+	}
+	
+	
+	catalog.addProductToCatalog("ssdcard");
+	catalog.addProductToCatalog("mouse");
+	
+	
+	error.checkThat(3, catalog.getAllProducts().get(2).getSku());
+	error.checkThat(350.0, catalog.getAllProducts().get(2).getPrice(), 0.01);
+	error.checkThat(0.50, catalog.getAllProducts().get(2).getWeight(), 0.01);
+	error.checkThat("Kingston", catalog.getAllProducts().get(2).getSsdcard().getBrand());
+	error.checkThat(480, catalog.getAllProducts().get(2).getSsdcard().getGigabytes());
+	
+	error.checkThat(4, catalog.getAllProducts().get(3).getSku());
+	error.checkThat(80.0, catalog.getAllProducts().get(3).getPrice(), 0.01);
+	error.checkThat(0.50, catalog.getAllProducts().get(3).getWeight(), 0.01);
+	error.checkThat("Logitech", catalog.getAllProducts().get(3).getMouse().getBrand());
+	error.checkThat("Bluetooth", catalog.getAllProducts().get(3).getMouse().getType());
+	
+}

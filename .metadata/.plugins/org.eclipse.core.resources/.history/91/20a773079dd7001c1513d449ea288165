@@ -1,0 +1,82 @@
+package br.com.virtualoutletstore.iterator.orderlist;
+
+import br.com.virtualoutletstore.builder.catalog.Product;
+import br.com.virtualoutletstore.facade.order.Order;
+
+public class OrderListIterator implements Iterator {
+
+	@Override
+	public void getOrderList() {
+		//List<Order> orderList = new ArrayList<>();
+		for(Order order: OrderList.getInstanceOfOrderList().getListOfOrders()) {
+			//orderList.add(order);
+			System.out.println("Cart: " + order.getCart());
+			System.out.println("Status: " + order.getStatus());
+			System.out.println("Shipping: " + order.getShipping());
+			System.out.println("\n=================\n");
+		}
+		//return orderList;
+	}
+
+	@Override
+	public void getProductsOfTheOrder() {
+		//List<Product> productsOfTheOrder = new ArrayList<>();
+		int i = 0;
+		for(Order order: OrderList.getInstanceOfOrderList().getListOfOrders()) {
+			int totalOfProducts = 0;
+			System.out.println("ORDER/CART " + (i+1) + ":");
+			for(Product product: order.getCart().getCart()) {
+				//productsOfTheOrder.add(product);
+				System.out.println("Sku: " + product.getSku());
+				System.out.println("Price: " + product.getPrice());
+				System.out.println("Weight: " + product.getWeight());
+				switch(product.getSku()) {
+				case 1:
+					System.out.println("Author: " + product.getBook().getAuthor());
+					System.out.println("Title: " + product.getBook().getTitle() + "\n");
+					break;
+				case 2:
+					System.out.println("Color: " + product.getTshirt().getColor());
+					System.out.println("Size: " + product.getTshirt().getSize() + "\n");
+					break;
+				case 3:
+					System.out.println("Brand: " + product.getSsdcard().getBrand());
+					System.out.println("Gigabytes: " + product.getSsdcard().getGigabytes() + "\n");
+					break;
+				case 4:
+					System.out.println("Brand: " + product.getMouse().getBrand());
+					System.out.println("Type: " + product.getMouse().getType() + "\n"); 
+					break;
+				}
+				totalOfProducts++;
+			}
+			System.out.println("Total of Products in this Order: " + totalOfProducts);
+			System.out.println("\n========================\n");
+			i++;
+		}
+		//return productsOfTheOrder;
+	}
+
+	@Override
+	public void getOrderTotalPrice() {
+		//List<Double> totalPrice = new ArrayList<>();
+		for(Order order: OrderList.getInstanceOfOrderList().getListOfOrders()) {
+			//totalPrice.add(order.getCart().getTotalPriceOfTheCart());
+			System.out.println("Cart total price: R$" + order.getCart().getTotalPriceOfTheCart());
+		}
+		//return totalPrice;
+	}
+
+	@Override
+	public void getOrderShipping() {
+		//List<String> shippingList = new ArrayList<>();
+		for(Order order: OrderList.getInstanceOfOrderList().getListOfOrders()) {
+			int i = 0;
+			//shippingList.add(order.getShipping());
+			System.out.println("Cart " + (i+1) + ":\n" + order.getShipping());
+			i++;
+		}
+		//return shippingList;
+	}
+
+}

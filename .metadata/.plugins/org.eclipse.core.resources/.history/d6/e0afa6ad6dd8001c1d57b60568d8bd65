@@ -1,0 +1,42 @@
+package br.com.virtualoutletstore.iterator.orderlist;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.com.virtualoutletstore.composite.cart.Cart;
+import br.com.virtualoutletstore.facade.order.Order;
+
+public class AddOrderToTheOrderListTest {
+	
+	private Order order1;
+	private Order order2;
+	private Order order3;
+	private Order order4;
+	
+	private Cart cart1;
+	private Cart cart2;
+	private Cart cart3;
+	private Cart cart4;
+	
+	@Before
+	public void setScenario() {
+		// Scenario
+		cart1 = new Cart();
+		cart2 = new Cart();
+		cart3 = new Cart();
+		cart4 = new Cart();
+		order1 = new Order();
+		order2 = new Order();
+		order3 = new Order();
+		order4 = new Order();
+	}
+	
+	@Test
+	public void addOrderToTheOrderList() {
+		// Action
+		
+		
+		// Verification
+	}
+
+}

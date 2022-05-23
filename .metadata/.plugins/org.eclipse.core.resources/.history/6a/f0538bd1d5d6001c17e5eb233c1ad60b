@@ -1,0 +1,46 @@
+package br.com.virtualoutletstore.builder.catalog;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+public class CatalogTest {
+
+	@Test
+	public void addBookToCatalogTest() {
+		// Scenario
+		Catalog catalog = new Catalog();
+		
+		// Action
+		catalog.addProductToCatalog("book");
+		catalog.addProductToCatalog("tshirt");
+		catalog.addProductToCatalog("ssdcard");
+		catalog.addProductToCatalog("mouse");
+		
+		// Verification
+		assertEquals(catalog.getAllProducts().get(0).getSku(), 1);
+		assertEquals(catalog.getAllProducts().get(0).getPrice(), 200.0, 0.01);
+		assertEquals(catalog.getAllProducts().get(0).getWeight(), 0.350, 0.001);
+		assertEquals(catalog.getAllProducts().get(0).getBook().getAuthor(), "Robert C. Martin; Michael C. Feathers; Timothy R. Ottinger");
+		assertEquals(catalog.getAllProducts().get(0).getBook().getTitle(), "Clean Code: A Handbook of Agile Software Craftsmanship");
+
+		assertEquals(catalog.getAllProducts().get(1).getSku(), 2);
+		assertEquals(catalog.getAllProducts().get(1).getPrice(), 50.0, 0.01);
+		assertEquals(catalog.getAllProducts().get(1).getWeight(), 0.100, 0.001);
+		assertEquals(catalog.getAllProducts().get(1).getTshirt().getColor(), "Black");
+		assertEquals(catalog.getAllProducts().get(1).getTshirt().getSize(), "G");
+
+		assertEquals(catalog.getAllProducts().get(2).getSku(), 3);
+		assertEquals(catalog.getAllProducts().get(2).getPrice(), 350.0, 0.01);
+		assertEquals(catalog.getAllProducts().get(2).getWeight(), 0.50, 0.01);
+		assertEquals(catalog.getAllProducts().get(2).getSsdcard().getBrand(), "Kingston");
+		assertEquals(catalog.getAllProducts().get(2).getSsdcard().getGigabytes(), 480);
+
+		assertEquals(catalog.getAllProducts().get(3).getSku(), 4);
+		assertEquals(catalog.getAllProducts().get(3).getPrice(), 80.0, 0.01);
+		assertEquals(catalog.getAllProducts().get(3).getWeight(), 0.50, 0.01);
+		assertEquals(catalog.getAllProducts().get(3).getTshirt().getColor(), "Logitech");
+		assertEquals(catalog.getAllProducts().get(3).getTshirt().getSize(), "Bluetooth");
+	}
+	
+}

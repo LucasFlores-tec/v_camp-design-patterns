@@ -1,0 +1,38 @@
+package br.com.virtualoutletstore.composite.cart;
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import br.com.virtualoutletstore.builder.catalog.Catalog;
+import br.com.virtualoutletstore.singleton.inventory.ProductInventory;
+
+public class GetCartProductQuantity {
+
+	@Test
+	public void removeAllProductsFromCart() {
+		// Scenario
+		Catalog catalogCartTest = new Catalog();
+		catalogCartTest.addProductToCatalog("book");
+		catalogCartTest.addProductToCatalog("tshirt");
+		catalogCartTest.addProductToCatalog("ssdcard");
+		catalogCartTest.addProductToCatalog("mouse");
+		ProductInventory.addCatalogToInventory(catalogCartTest);
+		Cart cart = new Cart();
+		cart.addProductToCart(1, 10);
+		cart.addProductToCart(2, 10);
+		cart.addProductToCart(3, 10);
+		cart.addProductToCart(4, 10);
+		
+		// Action
+		int productSku1Quantity = cart.getProductQuantity(1);
+		int productSku2Quantity = cart.getProductQuantity(2);
+		int productSku3Quantity = cart.getProductQuantity(3);
+		int productSku4Quantity = cart.getProductQuantity(4);
+		
+		//  Verification
+		assertEquals(productSku1Quantity, 10);
+		assertEquals(productSku2Quantity, 10);
+		assertEquals(productSku3Quantity, 10);
+		assertEquals(productSku4Quantity, 10);
+	}
+	
+}

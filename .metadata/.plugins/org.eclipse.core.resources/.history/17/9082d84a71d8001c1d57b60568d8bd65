@@ -1,0 +1,22 @@
+package br.com.virtualoutletstore.facade.order;
+
+import org.junit.Test;
+
+import br.com.virtualoutletstore.composite.cart.Cart;
+
+public class OrderTest {
+	
+	@Test
+	public void setOrderTest() {
+		// Scenario
+		Cart cart = new Cart();
+		Order order = new Order(cart, cart.getShipping(), "pending");
+		
+		
+		// Action
+		
+		
+		// Verification
+	}
+
+}

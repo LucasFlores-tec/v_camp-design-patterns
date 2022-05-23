@@ -1,0 +1,9 @@
+package br.com.virtualoutletstore.iterator.orderlist;
+
+import br.com.virtualoutletstore.facade.order.Order;
+
+public interface OrderStatusObserver {
+	
+	void alterStatus(Order order);
+
+}

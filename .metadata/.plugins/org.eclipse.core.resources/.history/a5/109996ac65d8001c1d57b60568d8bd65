@@ -1,0 +1,17 @@
+package br.com.virtualoutletstore.factory.shipping;
+
+import br.com.virtualoutletstore.composite.cart.Cart;
+
+public abstract class Shipping {
+	
+	private String type;
+
+	public void getPrice(Cart cart) {
+		
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+}

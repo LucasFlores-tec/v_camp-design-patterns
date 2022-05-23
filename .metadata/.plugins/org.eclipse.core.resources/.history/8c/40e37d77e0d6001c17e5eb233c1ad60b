@@ -1,0 +1,91 @@
+package br.com.virtualoutletstore.builder.catalog;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+
+import org.hamcrest.CoreMatchers;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ErrorCollector;
+import org.junit.runners.MethodSorters;
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class CatalogTest {
+	
+	private Catalog catalog;
+	
+	@Rule
+	public ErrorCollector error = new ErrorCollector();
+	
+	@Before
+	public void setTestScenario() {
+		// Scenario
+		catalog = new Catalog();
+	}
+
+	@Test
+	public void a_addBookToCatalog() {
+		// Scenario
+		catalog = new Catalog();
+		
+		// Action
+		catalog.addProductToCatalog("book");
+		
+		// Verification
+		error.checkThat(catalog.getAllProducts().get(0).getSku(), is(equalTo(1)));
+		error.checkThat(catalog.getAllProducts().get(0).getPrice(), is(equalTo(200.0)));
+		error.checkThat(catalog.getAllProducts().get(0).getWeight(), is(equalTo(0.350)));
+		error.checkThat(catalog.getAllProducts().get(0).getBook().getAuthor(), is(equalTo("Robert C. Martin; Michael C. Feathers; Timothy R. Ottinger")));
+		error.checkThat(catalog.getAllProducts().get(0).getBook().getTitle(), is(equalTo("Clean Code: A Handbook of Agile Software Craftsmanship")));
+
+	}
+
+	
+	@Test
+	public void b_addTshirtToCatalog() {
+		// Scenario
+		catalog = new Catalog();
+		
+		// Action
+		catalog.addProductToCatalog("tshirt");
+		
+		// Verification
+		error.checkThat(catalog.getAllProducts().get(1).getSku(), is(equalTo(2)));
+		error.checkThat(catalog.getAllProducts().get(1).getPrice(), is(equalTo(50.0)));
+		error.checkThat(catalog.getAllProducts().get(1).getWeight(), is(equalTo(0.100)));
+		error.checkThat(catalog.getAllProducts().get(1).getTshirt().getColor(), is(equalTo("Black")));
+		error.checkThat(catalog.getAllProducts().get(1).getTshirt().getSize(), is(equalTo("G")));
+		
+	}
+	
+	@Test
+	public void c_addSsdcartToCatalog() {
+		// Scenario
+		catalog = new Catalog();
+		
+		// Action
+		catalog.addProductToCatalog("ssdcard");
+		
+		// Verification
+		error.checkThat(catalog.getAllProducts().get(2).getSku(), is(equalTo(3)));
+		error.checkThat(catalog.getAllProducts().get(2).getPrice(), is(equalTo(350.0)));
+		error.checkThat(catalog.getAllProducts().get(2).getWeight(), is(equalTo(0.50)));
+		error.checkThat(catalog.getAllProducts().get(2).getSsdcard().getBrand(), is(equalTo("Kingston")));
+		error.checkThat(catalog.getAllProducts().get(2).getSsdcard().getGigabytes(), is(equalTo(480)));
+	}
+	
+	
+	catalog.addProductToCatalog("mouse");
+	
+	
+	
+	error.checkThat(4, catalog.getAllProducts().get(3).getSku());
+	error.checkThat(80.0, catalog.getAllProducts().get(3).getPrice(), 0.01);
+	error.checkThat(0.50, catalog.getAllProducts().get(3).getWeight(), 0.01);
+	error.checkThat("Logitech", catalog.getAllProducts().get(3).getMouse().getBrand());
+	error.checkThat("Bluetooth", catalog.getAllProducts().get(3).getMouse().getType());
+	
+}

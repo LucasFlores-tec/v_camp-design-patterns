@@ -1,0 +1,19 @@
+package br.com.virtualstore.singleton.inventory;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.ErrorCollector;
+
+import br.com.virtualoutletstore.builder.catalog.Catalog;
+
+public class ProductInventoryTest {
+	
+	@Rule
+	public ErrorCollector error = new ErrorCollector();
+	
+	@Before
+	public void setScerario() {
+		Catalog catalog = new Catalog();
+	}
+
+}

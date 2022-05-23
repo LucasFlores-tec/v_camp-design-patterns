@@ -1,0 +1,5 @@
+package br.com.virtualoutletstore.composite.cart;
+
+public class GetCartProductQuantity {
+
+}
